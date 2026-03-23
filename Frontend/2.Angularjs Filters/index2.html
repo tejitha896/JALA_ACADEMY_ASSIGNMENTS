@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="serviceApp">
+<head>
+  <title>AngularJS Services</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app2.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #fff0f5;
+      text-align: center;
+      padding: 40px;
+    }
+    .box {
+      background: #fff;
+      padding: 20px;
+      width: 400px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+  </style>
+</head>
+
+<body ng-controller="serviceCtrl">
+
+<div class="box">
+  <h2>Services Example</h2>
+
+  <p>Current URL: {{ url }}</p>
+
+  <p>Message: {{ message }}</p>
+
+  <button ng-click="loadData()">Load HTTP Data</button>
+
+  <p>{{ data }}</p>
+</div>
+
+</body>
+</html>

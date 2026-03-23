@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="apiApp">
+<head>
+  <title>Angular API Example</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app4.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #f6d365, #fda085);
+      text-align: center;
+      padding: 50px;
+    }
+
+    .box {
+      background: #fff;
+      padding: 25px;
+      width: 350px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+    }
+  </style>
+</head>
+
+<body ng-controller="apiCtrl">
+
+<div class="box">
+  <h2>AngularJS API Example</h2>
+
+  <p><b>Original:</b> {{ text }}</p>
+  <p><b>Uppercase:</b> {{ upperText }}</p>
+  <p><b>Lowercase:</b> {{ lowerText }}</p>
+</div>
+
+</body>
+</html>

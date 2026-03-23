@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="animateApp">
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS ng-show/ng-hide Animation</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-animate.js"></script>
+  <style>
+    body { font-family: Arial; margin: 30px; }
+    .box { width: 200px; height: 100px; background: #3498db; color: white; text-align: center; line-height: 100px; margin-top: 20px; }
+    
+    .fade.ng-enter { transition: 0.5s linear all; opacity: 0; }
+    .fade.ng-enter-active { opacity: 1; }
+    .fade.ng-leave { transition: 0.5s linear all; opacity: 1; }
+    .fade.ng-leave-active { opacity: 0; }
+  </style>
+</head>
+<body ng-controller="AnimateController">
+
+  <h2>ng-show/ng-hide Animation</h2>
+  <button ng-click="visible = !visible">Toggle Box</button>
+
+  <div class="box fade" ng-show="visible">
+    Hello AngularJS!
+  </div>
+
+<script>
+  angular.module('animateApp', ['ngAnimate'])
+    .controller('AnimateController', function($scope) {
+      $scope.visible = true;
+    });
+</script>
+</body>
+</html>

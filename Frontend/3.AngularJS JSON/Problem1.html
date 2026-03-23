@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+
+<body ng-controller="myCtrl">
+
+    <table border="1">
+        <tr>
+            <th ng-click="sortBy('name')">Name</th>
+            <th ng-click="sortBy('age')">Age</th>
+        </tr>
+
+        <tr ng-repeat="person in people | orderBy:sortColumn">
+            <td>{{$index}} - {{person.name}}</td>
+            <td ng-class="{'odd': $odd, 'even': $even}">
+                {{person.age}}
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        angular.module('myApp', [])
+            .controller('myCtrl', function ($scope) {
+                $scope.sortColumn = 'name';
+
+                // Load data directly (simulating JSON file content)
+                $scope.people = [
+                    { "name": "Ram", "age": 25 },
+                    { "name": "Ravi", "age": 22 },
+                    { "name": "Sita", "age": 27 },
+                    { "name": "Arjun", "age": 30 },
+                    { "name": "Kiran", "age": 19 },
+                    { "name": "Priya", "age": 24 },
+                    { "name": "Vikram", "age": 35 },
+                    { "name": "Anjali", "age": 21 }
+                ];
+
+                $scope.sortBy = function (column) {
+                    $scope.sortColumn = column;
+                };
+            });
+    </script>
+
+    <style>
+        .odd {
+            background-color: lightgray;
+        }
+
+        .even {
+            background-color: lightblue;
+        }
+    </style>
+
+</body>
+
+</html>

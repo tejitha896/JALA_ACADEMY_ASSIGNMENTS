@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Responsive Design</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .box {
+            background: #90caf9;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        img, video {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Media Query */
+        @media (max-width: 600px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Responsive Web Page</h2>
+
+<div class="container">
+    <div class="box">
+        <h3>Image</h3>
+        <img src="https://picsum.photos/400/300">
+    </div>
+
+    <div class="box">
+        <h3>Video</h3>
+        <video controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<p>
+✔ Uses viewport meta tag<br>
+✔ Responsive using media queries<br>
+✔ Grid layout adjusts based on screen size
+</p>
+
+</body>
+</html>

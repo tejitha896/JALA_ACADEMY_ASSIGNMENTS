@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Events - MySQL Integration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #764ba2;
+        }
+
+        button.refresh {
+            background-color: #48bb78;
+            margin-bottom: 20px;
+        }
+
+        button.refresh:hover {
+            background-color: #38a169;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .error {
+            background-color: #fed7d7;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c53030;
+        }
+
+        .success {
+            background-color: #c6f6d5;
+            color: #22543d;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border-left: 4px solid #48bb78;
+        }
+
+        .events-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .event-card {
+            background: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-card h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .event-card p {
+            color: #666;
+            margin-bottom: 5px;
+            line-height: 1.5;
+        }
+
+        .event-date {
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 30px;
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" ng-app="eventApp" ng-controller="EventController">
+        <h1>📅 Events Management System</h1>
+
+        <!-- Error Message Display -->
+        <div ng-if="errorMessage" class="error">
+            {{ errorMessage }}
+        </div>
+
+        <!-- Add New Event Section -->
+        <div class="section">
+            <h2>Add New Event</h2>
+            <form ng-submit="addNewEvent()">
+                <div class="form-group">
+                    <label for="eventName">Event Name *</label>
+                    <input type="text" id="eventName" ng-model="newEvent.name" placeholder="Enter event name" required>
+                </div>
+                <div class="form-group">
+                    <label for="eventDesc">Description</label>
+                    <textarea id="eventDesc" ng-model="newEvent.description"
+                        placeholder="Enter event description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">Date *</label>
+                    <input type="date" id="eventDate" ng-model="newEvent.date" required>
+                </div>
+                <button type="submit">Add Event</button>
+            </form>
+        </div>
+
+        <!-- Events List Section -->
+        <div class="section">
+            <h2>Events List</h2>
+            <button class="refresh" ng-click="refreshEvents()">🔄 Refresh Events</button>
+
+            <!-- Loading Indicator -->
+            <div ng-if="loading" class="loading">
+                <p>Loading events... ⏳</p>
+            </div>
+
+            <!-- Events Display -->
+            <div ng-if="!loading">
+                <div ng-if="events.length > 0" class="events-list">
+                    <div class="event-card" ng-repeat="event in events">
+                        <h3>{{ event.name }}</h3>
+                        <p>{{ event.description }}</p>
+                        <p class="event-date">📅 {{ event.date }}</p>
+                    </div>
+                </div>
+                <div ng-if="events.length === 0" class="no-events">
+                    <p>No events found. Create your first event above!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

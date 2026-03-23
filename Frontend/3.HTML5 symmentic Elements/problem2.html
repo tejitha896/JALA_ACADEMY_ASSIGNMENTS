@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Semantic Elements</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f8e9;
+            margin: 0;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        article {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #388e3c;
+            color: white;
+        }
+
+        form input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .info {
+            background: #e8f5e9;
+            padding: 10px;
+            border-left: 5px solid green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Semantic Elements in HTML</h1>
+</header>
+
+<article>
+
+    <h2>What are Semantic Elements?</h2>
+    <p>
+        Semantic elements clearly describe their meaning in a web page.
+        Examples: <b>&lt;article&gt;</b>, <b>&lt;form&gt;</b>, <b>&lt;table&gt;</b>.
+    </p>
+
+    <div class="info">
+        <b>Why use semantic tags?</b><br>
+        ✔ Better SEO (search engines understand content)<br>
+        ✔ Improves accessibility<br>
+        ✔ Cleaner and readable code
+    </div>
+
+    <h3>Table Example</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Course</th>
+        </tr>
+        <tr>
+            <td>Amit</td>
+            <td>HTML</td>
+        </tr>
+        <tr>
+            <td>Ravi</td>
+            <td>CSS</td>
+        </tr>
+    </table>
+
+    <h3>Form Example</h3>
+    <form>
+        <input type="text" placeholder="Enter Name" required>
+        <input type="email" placeholder="Enter Email" required>
+        <input type="submit" value="Submit">
+    </form>
+
+</article>
+
+</body>
+</html>

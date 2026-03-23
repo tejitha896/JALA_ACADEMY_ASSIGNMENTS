@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html ng-app="selectApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <title>AngularJS Select: ng-options vs ng-repeat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .demo-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .demo-section h3 {
+            color: #333;
+            margin-top: 0;
+        }
+
+        select {
+            padding: 5px;
+            margin: 5px 0;
+        }
+
+        .selected-value {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 3px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body ng-controller="SelectController">
+
+    <h1>AngularJS Select Elements: ng-options vs ng-repeat</h1>
+
+    <div class="demo-section">
+        <h3>1. Using ng-options (Recommended for select elements)</h3>
+        <p>ng-options automatically creates &lt;option&gt; elements and is more efficient:</p>
+
+        <label>Select a person (ng-options):</label><br>
+        <select ng-model="selectedPerson1" ng-options="person.name for person in people">
+            <option value="">-- Choose a person --</option>
+        </select>
+
+        <div class="selected-value">
+            Selected: {{selectedPerson1 ? selectedPerson1.name + ' (Age: ' + selectedPerson1.age + ')' : 'None'}}
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>2. Using ng-repeat (Creates option elements manually)</h3>
+        <p>ng-repeat creates &lt;option&gt; elements explicitly:</p>
+
+        <label>Select a person (ng-repeat):</label><br>
+        <select ng-model="selectedPerson2">
+            <option value="">-- Choose a person --</option>
+            <option ng-repeat="person in people" ng-value="person">
+                {{person.name}} ({{person.age}} years old)
+            </option>
+        </select>
+
+        <div class="selected-value">
+            Selected: {{selectedPerson2 ? selectedPerson2.name + ' (Age: ' + selectedPerson2.age + ')' : 'None'}}
+        </div>
+    </div>
+
+    <!--
+    <div class="demo-section">
+        <h3>Key Differences Demonstrated:</h3>
+        <ul>
+            <li><strong>ng-options:</strong> More concise, automatically handles option creation, better performance
+                with large datasets</li>
+            <li><strong>ng-repeat:</strong> More control over option formatting, can include additional text in
+                options
+            </li>
+            <li><strong>Data binding:</strong> ng-options binds to object references, ng-repeat with ng-value also
+                binds
+                to objects</li>
+        </ul>
+
+        <h4>Current Data:</h4>
+        <pre>{{people | json}}</pre>
+    </div>
+    -->
+
+    <script>
+        angular.module('selectApp', [])
+            .controller('SelectController', function ($scope) {
+                $scope.people = [
+                    { name: 'Ram', age: 25 },
+                    { name: 'Ravi', age: 22 },
+                    { name: 'Sita', age: 27 },
+                    { name: 'Arjun', age: 30 },
+                    { name: 'Kiran', age: 19 },
+                    { name: 'Priya', age: 24 },
+                    { name: 'Vikram', age: 35 },
+                    { name: 'Anjali', age: 21 }
+                ];
+
+                // Initialize selected values
+                $scope.selectedPerson1 = null;
+                $scope.selectedPerson2 = null;
+            });
+    </script>
+
+</body>
+
+</html>

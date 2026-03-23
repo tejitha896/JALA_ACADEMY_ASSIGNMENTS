@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="bindApp">
+<head>
+  <title>Data Binding</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app3.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #fff;
+      padding: 30px;
+    }
+    input {
+      padding: 8px;
+      margin: 10px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #ddd;
+      margin: 5px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body ng-controller="bindCtrl" ng-init="name='Student'">
+
+  <h2>Welcome {{ name }}</h2>
+
+  <input type="text" ng-model="newItem" placeholder="Enter item">
+
+  <button ng-click="addItem()">Add</button>
+
+  <ul>
+    <li ng-repeat="item in items">
+      {{ item }}
+    </li>
+  </ul>
+
+  <div ng-include="'footer.html'"></div>
+
+</body>
+</html>

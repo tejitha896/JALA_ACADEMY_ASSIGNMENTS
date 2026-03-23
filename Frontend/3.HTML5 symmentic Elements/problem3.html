@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 Semantic Tags - Detailed</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f3e5f5;
+        }
+
+        header {
+            background: #4a148c;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            background: #6a1b9a;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        article, aside {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+
+        aside {
+            background: #e1bee7;
+        }
+
+        figure {
+            text-align: center;
+        }
+
+        figcaption {
+            font-style: italic;
+        }
+
+        mark {
+            background: yellow;
+        }
+
+        time {
+            color: red;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: #ede7f6;
+            padding: 15px;
+            border-left: 5px solid #4a148c;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            background: #4a148c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>HTML5 Semantic Elements</h1>
+    <p>Structured and Meaningful Web Page</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</nav>
+
+<section>
+
+    <div class="info-box">
+        <h3>📘 What are Semantic Elements?</h3>
+        <p>
+            Semantic elements clearly describe their meaning to both the browser and developer.
+            They help make the code more readable and improve SEO.
+        </p>
+    </div>
+
+    <div class="info-box">
+        <h3>🧠 Why Use Semantic Tags?</h3>
+        <ul>
+            <li>Better search engine optimization (SEO)</li>
+            <li>Improved accessibility for screen readers</li>
+            <li>Clear and meaningful structure</li>
+            <li>Easy to maintain and understand</li>
+        </ul>
+    </div>
+
+    <article>
+        <h2>📰 Article Tag</h2>
+        <p>
+            The <b>&lt;article&gt;</b> tag is used for independent content like blogs or news.
+        </p>
+        <p>
+            Published on <time datetime="2026-03-23">March 23, 2026</time>
+        </p>
+    </article>
+
+    <aside>
+        <h3>📌 Aside Tag</h3>
+        <p>
+            Used for side content such as ads, notes, or related links.
+        </p>
+    </aside>
+
+    <figure>
+        <img src="https://picsum.photos/300" alt="Sample Image">
+        <figcaption>🖼️ Figure: Image with Caption</figcaption>
+    </figure>
+
+    <p>
+        This is <mark>highlighted text</mark> using the mark tag.
+    </p>
+
+    <hgroup>
+        <h2>Main Heading</h2>
+        <h4>Sub Heading using hgroup</h4>
+    </hgroup>
+
+    <div class="info-box">
+        <h3>🧾 Tag Explanation Summary</h3>
+        <ul>
+            <li><b>&lt;header&gt;</b> → Top section of page</li>
+            <li><b>&lt;nav&gt;</b> → Navigation links</li>
+            <li><b>&lt;section&gt;</b> → Group of related content</li>
+            <li><b>&lt;article&gt;</b> → Independent content</li>
+            <li><b>&lt;aside&gt;</b> → Sidebar content</li>
+            <li><b>&lt;figure&gt;</b> → Image with caption</li>
+            <li><b>&lt;figcaption&gt;</b> → Caption for image</li>
+            <li><b>&lt;time&gt;</b> → Date/time representation</li>
+            <li><b>&lt;mark&gt;</b> → Highlight text</li>
+            <li><b>&lt;footer&gt;</b> → Bottom section</li>
+        </ul>
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 HTML5 Semantic Demo</p>
+</footer>
+
+</body>
+</html>

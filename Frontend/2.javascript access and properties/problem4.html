@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Getter & Setter Counter</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #e65100;
+        }
+
+        #value {
+            font-size: 60px;
+            color: #d84315;
+            margin: 20px 0;
+            transition: 0.3s;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #ff7043;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 10px;
+        }
+
+        button:hover {
+            background: #d84315;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Getter & Setter Counter</h2>
+    <div id="value">0</div>
+    <button onclick="increase()">Increase</button>
+    <button onclick="decrease()">Decrease</button>
+    <button onclick="reset()">Reset</button>
+</div>
+
+<script>
+let counter = {
+    _count: 0,
+
+    // Getter
+    get count() {
+        return this._count;
+    },
+
+    // Setter
+    set count(value) {
+        this._count = value;
+    }
+};
+
+function updateDisplay() {
+    const display = document.getElementById("value");
+    display.innerText = counter.count;
+
+    // Animation effect
+    display.style.transform = "scale(1.2)";
+    setTimeout(() => {
+        display.style.transform = "scale(1)";
+    }, 150);
+}
+
+function increase() {
+    counter.count = counter.count + 1;
+    updateDisplay();
+}
+
+function decrease() {
+    counter.count = counter.count - 1;
+    updateDisplay();
+}
+
+function reset() {
+    counter.count = 0;
+    updateDisplay();
+}
+</script>
+
+</body>
+</html>

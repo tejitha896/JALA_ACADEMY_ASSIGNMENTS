@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>AngularJS Module & Controller</title>
+
+  <!-- AngularJS Library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <!-- External JS File -->
+  <script src="app2.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(to right, #74ebd5, #acb6e5);
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      width: 320px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Directive + Controller -->
+  <div class="card" ng-controller="mainCtrl">
+    <h2>{{ title }}</h2>
+    <p>{{ message }}</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="scopeApp">
+<head>
+  <title>Scope Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app4.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f9f9f9;
+      padding: 40px;
+      text-align: center;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      margin: auto;
+      width: 350px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" ng-controller="firstCtrl">
+    <h3>Controller 1</h3>
+    <p>{{ message }}</p>
+    <p>{{ rootMsg }}</p>
+  </div>
+
+  <div class="container" ng-controller="secondCtrl">
+    <h3>Controller 2</h3>
+    <p>{{ message }}</p>
+    <p>{{ rootMsg }}</p>
+  </div>
+
+</body>
+</html>

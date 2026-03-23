@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Shadow Effects</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #89f7fe, #66a6ff);
+            text-align: center;
+        }
+
+        h2 {
+            color: #fff;
+        }
+
+        .box {
+            width: 300px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            transform: scale(1.05);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px gray;
+            transition: 0.3s;
+        }
+
+        img:hover {
+            box-shadow: 10px 10px 25px black;
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+
+        p {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Shadow Effect with Hover</h2>
+
+<div class="box">
+    <img src="https://picsum.photos/300" alt="Image">
+    <p>Hover on image & box to see shadow effect</p>
+</div>
+
+</body>
+</html>

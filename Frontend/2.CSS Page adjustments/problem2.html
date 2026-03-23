@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visibility & Display</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f1f8e9;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2e7d32;
+        }
+
+        .box {
+            width: 200px;
+            margin: 15px auto;
+            padding: 15px;
+            background: #81d4fa;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .hidden { visibility: hidden; }
+        .none { display: none; }
+        .inline { display: inline; background: #ffcc80; }
+        .block { display: block; background: #ffab91; }
+        .list { display: list-item; margin-left: 40px; }
+        .contents { display: contents; }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            background: #4caf50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Visibility & Display Demo</h2>
+
+<div id="demo" class="box">This is a Visible Box</div>
+
+<button onclick="show()">Visible</button>
+<button onclick="hide()">Hidden</button>
+<button onclick="remove()">None</button>
+
+<script>
+function show() {
+    document.getElementById("demo").style.visibility = "visible";
+    document.getElementById("demo").style.display = "block";
+}
+
+function hide() {
+    document.getElementById("demo").style.visibility = "hidden";
+}
+
+function remove() {
+    document.getElementById("demo").style.display = "none";
+}
+</script>
+
+<p>
+<b>Explanation:</b><br>
+- visibility: hidden → hides element but space remains<br>
+- display: none → removes element completely<br>
+- display: block/inline → controls layout<br>
+</p>
+
+</body>
+</html>

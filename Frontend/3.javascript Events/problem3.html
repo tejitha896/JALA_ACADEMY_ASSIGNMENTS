@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Console Debugging</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #e8f5e9;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .box {
+            margin-top: 20px;
+            background: white;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>console.log() Debugging</h2>
+
+<div class="box">
+    <button onclick="debug()">Run Debug Code</button>
+    <p>Open browser console (F12) to see output</p>
+</div>
+
+<script>
+function debug() {
+    let a = 10;
+    let b = 20;
+    let sum = a + b;
+
+    console.log("Value of a:", a);
+    console.log("Value of b:", b);
+    console.log("Sum:", sum);
+
+    alert("Check Console for Debug Output");
+}
+</script>
+
+</body>
+</html>

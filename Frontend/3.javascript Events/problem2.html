@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Validation</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #fff3e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background: #ff9800;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #e65100;
+        }
+
+        #msg {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+<form onsubmit="return validateForm()">
+    <h2>Validation</h2>
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <div id="msg"></div>
+
+    <button type="submit">Submit</button>
+
+    <p>
+        This ensures the textbox is <b>not empty</b> before submitting.
+    </p>
+</form>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value;
+
+    if (name === "") {
+        document.getElementById("msg").innerText = "Name cannot be empty!";
+        return false;
+    }
+
+    alert("Form Submitted Successfully!");
+    return true;
+}
+</script>
+
+</body>
+</html>

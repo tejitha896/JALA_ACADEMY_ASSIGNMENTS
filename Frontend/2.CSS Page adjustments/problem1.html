@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Styling with Hover</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        table {
+            margin: 40px auto;
+            width: 70%;
+            border-collapse: collapse;
+            border: 3px solid black;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 15px;
+            text-align: center;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #ffe082;
+            transform: scale(1.02);
+        }
+
+        table:hover {
+            background: #e3f2fd;
+        }
+
+        caption {
+            margin: 10px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Styled Table with Hover Effect</h2>
+
+<table>
+    <caption>Student Information</caption>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Course</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Amit</td>
+        <td>HTML</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Ravi</td>
+        <td>CSS</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Priya</td>
+        <td>JavaScript</td>
+    </tr>
+</table>
+
+<p>Hover over rows to see color change and interaction.</p>
+
+</body>
+</html>

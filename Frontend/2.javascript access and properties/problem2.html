@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>call() vs apply()</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f3e5f5;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        button {
+            padding: 12px 20px;
+            margin: 10px;
+            border: none;
+            background: #6a1b9a;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<h2>call() vs apply()</h2>
+
+<button onclick="useCall()">Use call()</button>
+<button onclick="useApply()">Use apply()</button>
+
+<div class="output" id="result"></div>
+
+<script>
+const person = {
+    fullName: function(city, country) {
+        return this.firstName + " " + this.lastName + ", " + city + ", " + country;
+    }
+};
+
+const person1 = {
+    firstName: "John",
+    lastName: "Doe"
+};
+
+function useCall() {
+    let result = person.fullName.call(person1, "New York", "USA");
+    document.getElementById("result").innerHTML = "call(): " + result;
+}
+
+function useApply() {
+    let result = person.fullName.apply(person1, ["London", "UK"]);
+    document.getElementById("result").innerHTML = "apply(): " + result;
+}
+</script>
+
+<p><b>Difference:</b> call() takes arguments separately, apply() takes arguments as an array.</p>
+
+</body>
+</html>

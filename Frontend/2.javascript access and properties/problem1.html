@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>This Keyword Example</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            background: #ff5252;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #d32f2f;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Click the Button to Disappear</h2>
+    <button onclick="this.style.display='none'">Click Me</button>
+</div>
+
+</body>
+</html>

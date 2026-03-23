@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiple Background Images</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: Arial;
+            background-image: 
+                url('https://picsum.photos/200/200'),
+                url('https://picsum.photos/300/300'),
+                linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+
+            background-size: 150px 150px, 300px 300px, cover;
+            background-position: top left, bottom right, center;
+            background-repeat: no-repeat, no-repeat, no-repeat;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            text-align: center;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .content:hover {
+            transform: scale(1.1);
+            color: yellow;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1>Multiple Background Images</h1>
+    <p>Images with different sizes and positions</p>
+</div>
+
+</body>
+</html>

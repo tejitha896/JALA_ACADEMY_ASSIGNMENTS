@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM - ng-show, ng-hide, ng-disabled Directives</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            font-size: 16px;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .control-panel {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .checkbox-group,
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            margin-top: 5px;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        input[type="text"]:disabled,
+        input[type="email"]:disabled,
+        select:disabled,
+        button:disabled {
+            background-color: #e2e8f0;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+
+        button.primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        button.primary:hover:not(:disabled) {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button.primary:disabled {
+            background-color: #cbd5e0;
+            color: #999;
+        }
+
+        button.success {
+            background-color: #48bb78;
+            color: white;
+        }
+
+        button.success:hover:not(:disabled) {
+            background-color: #38a169;
+        }
+
+        button.danger {
+            background-color: #f56565;
+            color: white;
+        }
+
+        button.danger:hover:not(:disabled) {
+            background-color: #e53e3e;
+        }
+
+        .info-box {
+            background: #edf2f7;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .info-box.success {
+            background: #c6f6d5;
+            border-left-color: #48bb78;
+        }
+
+        .info-box.warning {
+            background: #feebc8;
+            border-left-color: #ed8936;
+        }
+
+        .info-box.error {
+            background: #fed7d7;
+            border-left-color: #f56565;
+        }
+
+        .info-box p {
+            color: #333;
+            margin: 0;
+        }
+
+        .display-box {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .demo-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .demo-item {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 6px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .demo-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .toggle-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status.active {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+
+        .status.inactive {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+
+        .code-section {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+
+        .line {
+            line-height: 1.6;
+        }
+
+        .keyword {
+            color: #f6ad55;
+        }
+
+        .string {
+            color: #68d391;
+        }
+
+        .tag {
+            color: #63b3ed;
+        }
+
+        @media (max-width: 768px) {
+            .demo-content {
+                grid-template-columns: 1fr;
+            }
+
+            .toggle-buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" ng-app="domApp" ng-controller="DOMController">
+
+        <div class="header">
+            <h1>AngularJS Directives: ng-show, ng-hide, ng-disabled</h1>
+        </div>
+
+        <!-- ng-show and ng-hide Section -->
+        <div class="section">
+            <h2>ng-show and ng-hide</h2>
+
+            <div class="control-panel">
+                <h3>Controls:</h3>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" ng-model="showMessage"> Show Message
+                    </label>
+                </div>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" ng-model="hideContent"> Hide Content
+                    </label>
+                </div>
+            </div>
+
+            <!-- ng-show Example -->
+            <div class="demo-content">
+                <div class="demo-item">
+                    <h4>ng-show Example</h4>
+                    <div ng-show="showMessage" class="info-box success">
+                        ✅ This is visible (ng-show="showMessage")
+                    </div>
+
+                    <p>Status: <span class="status" ng-class="{active: showMessage, inactive: !showMessage}">
+                            {{ showMessage ? 'VISIBLE' : 'HIDDEN' }}
+                        </span></p>
+                </div>
+
+                <!-- ng-hide Example -->
+                <div class="demo-item">
+                    <h4>ng-hide Example</h4>
+                    <div ng-hide="hideContent" class="info-box warning">
+                        ✅ This is visible (ng-hide="hideContent")
+                    </div>
+
+                    <p>Status: <span class="status" ng-class="{active: !hideContent, inactive: hideContent}">
+                            {{ hideContent ? 'HIDDEN' : 'VISIBLE' }}
+                        </span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ng-disabled Section -->
+        <div class="section">
+            <h2>ng-disabled</h2>
+
+            <div class="control-panel">
+                <h3>Controls:</h3>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" ng-model="disableInputs"> Disable Inputs
+                    </label>
+                </div>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" ng-model="disableButton"> Disable Submit Button
+                    </label>
+                </div>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" ng-model="requireValidation"> Require Form Validation
+                    </label>
+                </div>
+            </div>
+
+            <!-- Form with ng-disabled -->
+            <div class="demo-content">
+                <div class="demo-item">
+                    <h4>Disabled Form Fields</h4>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" ng-model="formData.username" ng-disabled="disableInputs"
+                            placeholder="Enter username">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" ng-model="formData.email" ng-disabled="disableInputs"
+                            placeholder="Enter email">
+                    </div>
+
+                    <p>Status: <span class="status" ng-class="{inactive: disableInputs, active: !disableInputs}">
+                            {{ disableInputs ? 'DISABLED' : 'ENABLED' }}
+                        </span></p>
+                </div>
+
+                <div class="demo-item">
+                    <h4>Disabled Buttons</h4>
+                    <div class="form-group">
+                        <button class="primary" ng-disabled="disableButton" ng-click="submitForm()">
+                            Submit Form
+                        </button>
+                        <button class="success" ng-disabled="disableButton" ng-click="resetForm()">
+                            Reset
+                        </button>
+                    </div>
+
+                    <p>Button Status: <span class="status" ng-class="{inactive: disableButton, active: !disableButton}">
+                            {{ disableButton ? 'DISABLED' : 'ENABLED' }}
+                        </span></p>
+                </div>
+            </div>
+
+            <!-- Conditional Disabling -->
+            <h3>Conditional Field Disabling</h3>
+            <div class="info-box">
+                <label>
+                    <input type="checkbox" ng-model="requireValidation"> Validation Required
+                </label>
+            </div>
+            <div ng-show="requireValidation" class="info-box warning">
+                Fields disabled until email is valid
+            </div>
+
+            <div class="demo-content">
+                <div class="demo-item">
+                    <h4>Email Field (Required)</h4>
+                    <div class="form-group">
+                        <label for="valEmail">Email:</label>
+                        <input type="email" id="valEmail" ng-model="formData.email" placeholder="Enter email">
+                        <p style="font-size: 12px; color: #666; margin-top: 5px;">
+                            {{ formData.email ? '✅ Email entered' : '❌ Email required' }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="demo-item">
+                    <h4>Phone Field (Conditional)</h4>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone" ng-model="formData.phone"
+                            ng-disabled="requireValidation && !formData.email" placeholder="Enter phone number">
+                        <p ng-show="requireValidation && !formData.email"
+                            style="color: #f56565; font-size: 12px; margin-top: 5px;">
+                            ❌ Disabled until email is entered
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+            </div>
+        </div>
+
+        <!-- User Profile Section -->
+        <div class="section">
+            <h2>User Profile Manager</h2>
+
+            <div class="control-panel">
+                <h3>Settings:</h3>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" ng-model="isEditMode"> Edit Mode
+                    </label>
+                </div>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" ng-model="agreeToTerms"> Agree to Terms
+                    </label>
+                </div>
+            </div>
+
+            <div class="demo-item" style="margin-bottom: 20px;">
+
+                <div ng-show="!isEditMode" class="display-box">
+                    <strong>Name:</strong> {{ profileData.name }}<br>
+                    <strong>Email:</strong> {{ profileData.email }}<br>
+                    <strong>Country:</strong> {{ profileData.country }}<br>
+                    <strong>Bio:</strong> {{ profileData.bio }}
+                </div>
+
+                <div ng-show="isEditMode">
+                    <div class="form-group">
+                        <label for="profName">Name:</label>
+                        <input type="text" id="profName" ng-model="profileData.name" placeholder="Enter your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profEmail">Email:</label>
+                        <input type="email" id="profEmail" ng-model="profileData.email" placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profCountry">Country:</label>
+                        <select id="profCountry" ng-model="profileData.country">
+                            <option value="">Select Country</option>
+                            <option value="USA">USA</option>
+                            <option value="India">India</option>
+                            <option value="UK">UK</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Australia">Australia</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profBio">Bio:</label>
+                        <textarea id="profBio" ng-model="profileData.bio" placeholder="Enter your bio"
+                            style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 4px; font-family: inherit; min-height: 80px;"></textarea>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="toggle-buttons">
+                <button class="primary" ng-show="!isEditMode" ng-click="isEditMode = true">
+                    ✏️ Edit Profile
+                </button>
+
+                <button class="success" ng-show="isEditMode" ng-disabled="!agreeToTerms" ng-click="saveProfile()">
+                    💾 Save Changes
+                </button>
+
+                <button class="danger" ng-show="isEditMode" ng-click="isEditMode = false">
+                    ❌ Cancel
+                </button>
+            </div>
+
+            <div ng-show="profileSaved" class="info-box success" style="margin-top: 15px;">
+                Profile saved successfully!
+            </div>
+
+            <div ng-show="isEditMode && !agreeToTerms" class="info-box warning" style="margin-top: 15px;">
+                Please agree to terms to save
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        var app = angular.module('domApp', []);
+
+        app.controller('DOMController', function ($scope, $timeout) {
+
+            $scope.hideContent = false;
+            $scope.disableInputs = false;
+            $scope.disableButton = false;
+            $scope.requireValidation = false;
+
+            $scope.formData = {
+                username: '',
+                email: '',
+                phone: ''
+            };
+
+            $scope.isEditMode = false;
+            $scope.agreeToTerms = false;
+            $scope.profileSaved = false;
+
+            $scope.profileData = {
+                name: 'John Doe',
+                email: 'john@example.com',
+                country: 'USA',
+                bio: 'Full-stack developer with 5 years of experience'
+            };
+
+            $scope.submitForm = function () {
+                alert('Form submitted!\nUsername: ' + $scope.formData.username + '\nEmail: ' + $scope.formData.email);
+            };
+
+            $scope.resetForm = function () {
+                $scope.formData = {
+                    username: '',
+                    email: '',
+                    phone: ''
+                };
+                alert('Form reset!');
+            };
+
+            $scope.saveProfile = function () {
+                if ($scope.agreeToTerms) {
+                    $scope.profileSaved = true;
+                    $scope.isEditMode = false;
+
+                    $timeout(function () {
+                        $scope.profileSaved = false;
+                    }, 3000);
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

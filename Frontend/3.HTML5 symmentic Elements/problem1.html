@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Non-Semantic Elements</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            margin: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .header, .footer {
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .content {
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: red;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 5px solid #1976d2;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h2>Non-Semantic Elements</h2>
+    </div>
+
+    <div class="content">
+
+        <h3>What are Non-Semantic Elements?</h3>
+        <p>
+            Non-semantic elements do not describe their content.
+            Examples: <span class="highlight">&lt;div&gt;</span> and <span class="highlight">&lt;span&gt;</span>.
+        </p>
+
+        <div class="info-box">
+            <b>&lt;div&gt;:</b> Block-level container used for grouping content.<br>
+            <b>&lt;span&gt;:</b> Inline container used to style part of text.
+        </div>
+
+        <h3>Example Usage</h3>
+        <p>
+            This is a <span class="highlight">highlighted text</span> using span inside a div container.
+        </p>
+
+        <div class="info-box">
+            <b>Browser View Explanation:</b><br>
+            - Div creates separate blocks<br>
+            - Span changes only part of text<br>
+            - Helps in styling and layout control
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Non-Semantic Example &copy; 2026
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hoisting - Before & After</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      text-align: center;
+      padding-top: 40px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .box {
+      background: white;
+      width: 300px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .box h3 {
+      color: #333;
+    }
+
+    .result {
+      margin-top: 10px;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      border-left: 4px solid #007bff;
+      text-align: left;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+
+<body>
+
+<h2>Variable Hoisting (Before & After)</h2>
+
+<div class="container">
+  <div class="box">
+    <h3>Before Execution (Concept)</h3>
+    <div class="result">
+      x is declared but not initialized → <br>
+      x = undefined (hoisted)
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>After Execution</h3>
+    <button onclick="showHoisting()">Run Code</button>
+    <div class="result" id="output"></div>
+  </div>
+</div>
+
+<script>
+  function showHoisting() {
+    let output = document.getElementById("output");
+
+    x = 10; // assigned before declaration
+    output.innerHTML = "Value of x: " + x;
+
+    var x; // declaration is hoisted
+  }
+</script>
+
+</body>
+</html>

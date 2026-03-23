@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hero Image</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .hero {
+            background-image: url("https://picsum.photos/1200/600");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: black;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="hero">
+    <div class="hero-text">
+        <h1>Welcome to Hero Section</h1>
+        <p>Full Screen Background Image</p>
+        <button>Learn More</button>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Padding vs Margin</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #fffde7;
+            text-align: center;
+        }
+
+        h2 {
+            color: #f57f17;
+        }
+
+        .outer {
+            background: #e1bee7;
+            padding: 40px;
+            margin: 40px auto;
+            width: 60%;
+            border: 3px solid purple;
+        }
+
+        .inner {
+            background: #90caf9;
+            padding: 30px;
+            margin: 30px;
+            border: 2px solid blue;
+            transition: 0.3s;
+        }
+
+        .inner:hover {
+            transform: scale(1.1);
+            background: #64b5f6;
+        }
+
+        .label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Padding vs Margin</h2>
+
+<div class="outer">
+    <div class="inner">
+        <p>Content Area</p>
+    </div>
+</div>
+
+<p><b>Padding:</b> Space inside the element</p>
+<p><b>Margin:</b> Space outside the element</p>
+
+</body>
+</html>

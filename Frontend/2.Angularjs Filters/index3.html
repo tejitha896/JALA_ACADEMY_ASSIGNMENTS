@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="httpApp">
+<head>
+  <title>HTTP Methods</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app3.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #e6ffe6;
+      text-align: center;
+      padding: 40px;
+    }
+    .box {
+      background: #fff;
+      padding: 20px;
+      width: 400px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px gray;
+    }
+    button {
+      margin: 10px;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body ng-controller="httpCtrl">
+
+<div class="box">
+  <h2>HTTP Example</h2>
+
+  <button ng-click="getData()">GET</button>
+  <button ng-click="postData()">POST</button>
+
+  <p>Status: {{ status }}</p>
+  <p>Data: {{ data }}</p>
+  <p>URL: {{ config.url }}</p>
+</div>
+
+</body>
+</html>

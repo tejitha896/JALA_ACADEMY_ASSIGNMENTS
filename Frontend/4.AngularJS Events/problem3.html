@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AngularJS Events - ng-click, ng-mousemove, $event</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #333;
+        }
+
+        .section {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 5px;
+        }
+
+        button.primary {
+            background-color: #667eea;
+            color: white;
+        }
+
+        button.primary:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        button.success {
+            background-color: #48bb78;
+            color: white;
+        }
+
+        button.success:hover {
+            background-color: #38a169;
+        }
+
+        button.danger {
+            background-color: #f56565;
+            color: white;
+        }
+
+        button.danger:hover {
+            background-color: #e53e3e;
+        }
+
+        button.warning {
+            background-color: #ed8936;
+            color: white;
+        }
+
+        button.warning:hover {
+            background-color: #dd6b20;
+        }
+
+        .info-box {
+            background: #edf2f7;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+
+        .info-box.success {
+            background: #c6f6d5;
+            border-left-color: #48bb78;
+        }
+
+        .info-box.warning {
+            background: #feebc8;
+            border-left-color: #ed8936;
+        }
+
+        .event-log {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 10px 0;
+        }
+
+        .event-item {
+            padding: 5px;
+            border-bottom: 1px solid #ddd;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+
+        .event-item:last-child {
+            border-bottom: none;
+        }
+
+        .mouse-tracker {
+            background: #f0f4ff;
+            border: 2px solid #667eea;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            margin: 15px 0;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mouse-tracker:hover {
+            cursor: pointer;
+        }
+
+        .counter-display {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .demo-area {
+            background: #fff5f5;
+            border: 2px dashed #f56565;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 15px 0;
+            min-height: 100px;
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            border-radius: 6px;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .stat-box {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .coordinates {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        @media (max-width: 768px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" ng-app="eventApp" ng-controller="EventController">
+
+        <div class="header">
+            <h1>AngularJS Events - ng-click, ng-mousemove, $event</h1>
+        </div>
+
+        <!-- Section 1: ng-click Examples -->
+        <div class="section">
+            <h2>ng-click - Click Events</h2>
+
+            <h3>Simple Clicks</h3>
+            <div class="button-group">
+                <button class="primary" ng-click="incrementCounter()">Increment</button>
+                <button class="danger" ng-click="decrementCounter()">Decrement</button>
+                <button class="warning" ng-click="resetCounter()">Reset</button>
+            </div>
+
+            <div class="counter-display">
+                Count: {{ counter }}
+            </div>
+
+            <h3>Click with Parameters</h3>
+            <div class="button-group">
+                <button class="primary" ng-click="addCounter(5)">+5</button>
+                <button class="primary" ng-click="addCounter(10)">+10</button>
+                <button class="danger" ng-click="subtractCounter(5)">-5</button>
+                <button class="danger" ng-click="subtractCounter(10)">-10</button>
+            </div>
+
+            <h3>Click with Multiple Actions</h3>
+            <div class="button-group">
+                <button class="success" ng-click="clickAction('clicked'); logEvent('Button Action')">
+                    Click Me
+                </button>
+                <button class="warning" ng-click="color = '#667eea'; logEvent('Color Changed')">
+                    Blue
+                </button>
+                <button class="danger" ng-click="color = '#f56565'; logEvent('Color Changed')">
+                    Red
+                </button>
+            </div>
+
+            <div class="info-box success" ng-show="lastAction">
+                Last Action: {{ lastAction }}
+            </div>
+
+            <div class="event-log">
+                <div class="event-item" ng-repeat="log in clickLogs track by $index">
+                    {{ log }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: ng-mousemove Examples -->
+        <div class="section">
+            <h2>ng-mousemove - Mouse Movement</h2>
+
+            <h3>Track Mouse Position</h3>
+            <div class="mouse-tracker" ng-mousemove="updateMousePosition($event)"
+                style="background-color: rgba(102, 126, 234, 0.1);">
+                <div class="coordinates" ng-show="mouseX !== null">
+                    X: {{ mouseX }} | Y: {{ mouseY }}
+                </div>
+                <p ng-show="mouseX === null">Move mouse here to track position</p>
+            </div>
+
+            <h3>Mouse Movement Counter</h3>
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Total Movements</div>
+                    <div class="stat-value">{{ mouseMoveCount }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Current X</div>
+                    <div class="stat-value">{{ mouseX || 0 }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Current Y</div>
+                    <div class="stat-value">{{ mouseY || 0 }}</div>
+                </div>
+            </div>
+
+            <button class="primary" ng-click="resetMouseStats()">Reset Stats</button>
+
+            <h3>Interactive Drawing Area</h3>
+            <div class="demo-area" ng-mousemove="trackMovement($event)" style="border-color: #f56565;">
+                <p>Move your mouse in this area</p>
+                <div ng-show="lastMouseEvent">
+                    <p><strong>Last Position:</strong> X: {{ lastMouseEvent.x }}, Y: {{ lastMouseEvent.y }}</p>
+                    <p><strong>Element:</strong> {{ lastMouseEvent.element }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: $event Usage -->
+        <div class="section">
+            <h2>$event - Event Object Access</h2>
+
+            <h3>Click Event Details</h3>
+            <button class="primary" ng-click="getClickDetails($event)">Click for Details</button>
+
+            <div class="info-box" ng-show="eventDetails">
+                <p><strong>Event Type:</strong> {{ eventDetails.type }}</p>
+                <p><strong>Click Position X:</strong> {{ eventDetails.clientX }}</p>
+                <p><strong>Click Position Y:</strong> {{ eventDetails.clientY }}</p>
+                <p><strong>Page X:</strong> {{ eventDetails.pageX }}</p>
+                <p><strong>Page Y:</strong> {{ eventDetails.pageY }}</p>
+                <p><strong>Button:</strong> {{ eventDetails.button === 0 ? 'Left' : eventDetails.button === 1 ? 'Middle'
+                    : 'Right' }}</p>
+                <p><strong>Timestamp:</strong> {{ eventDetails.timeStamp }}</p>
+            </div>
+
+            <h3>Mouse Event Details (Move Here)</h3>
+            <div class="mouse-tracker" ng-mousemove="getMouseDetails($event)"
+                style="background-color: rgba(72, 187, 120, 0.1);">
+                <div ng-show="mouseDetails">
+                    <p><strong>Movement Type:</strong> {{ mouseDetails.type }}</p>
+                    <p><strong>Position:</strong> ({{ mouseDetails.clientX }}, {{ mouseDetails.clientY }})</p>
+                    <p><strong>Screen Position:</strong> ({{ mouseDetails.screenX }}, {{ mouseDetails.screenY }})</p>
+                </div>
+                <p ng-show="!mouseDetails">Move mouse here to see event details</p>
+            </div>
+
+            <h3>Keyboard & Key Detection</h3>
+            <button class="primary" ng-click="detectKey($event)">Check Key (Click with Modifiers)</button>
+            <textarea ng-model="keyInfo"
+                placeholder="Click the button above while holding Ctrl, Shift, or Alt"></textarea>
+
+            <h3>Event Coordinate Information</h3>
+            <div class="demo-area" ng-click="logCoordinates($event)" style="cursor: pointer; border-color: #667eea;">
+                Click anywhere in this box to see coordinates
+                <div ng-show="coordinates" class="info-box success">
+                    <p><strong>Client Coordinates:</strong> ({{ coordinates.clientX }}, {{ coordinates.clientY }})</p>
+                    <p><strong>Page Coordinates:</strong> ({{ coordinates.pageX }}, {{ coordinates.pageY }})</p>
+                    <p><strong>Screen Coordinates:</strong> ({{ coordinates.screenX }}, {{ coordinates.screenY }})</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Combined Examples -->
+        <div class="section">
+            <h2>Combined Event Handling</h2>
+
+            <h3>Interactive Color Palette</h3>
+            <div>
+                <button class="primary" ng-repeat="color in colorPalette" ng-click="selectColor(color, $event)"
+                    ng-style="{ 'background-color': color }" style="width: 50px; height: 50px; margin: 5px;">
+                </button>
+            </div>
+            <div class="info-box success" ng-show="selectedColor">
+                Selected: {{ selectedColor }}
+            </div>
+
+            <h3>Form with Event Tracking</h3>
+            <input type="text" placeholder="Type here..." ng-model="formInput" ng-mousemove="trackInputMouse($event)"
+                style="width: 100%; padding: 10px; margin: 10px 0;">
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Input Length</div>
+                    <div class="stat-value">{{ formInput.length || 0 }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Characters</div>
+                    <div class="stat-value">{{ formInput ? (formInput | uppercase).length : 0 }}</div>
+                </div>
+            </div>
+
+            <h3>Button with Hover Count</h3>
+            <button class="success" ng-mouseenter="hoverCount = hoverCount + 1" ng-click="clickLog('Button pressed')"
+                style="padding: 20px 40px; font-size: 16px;">
+                Hover Me & Click (Hovers: {{ hoverCount }})
+            </button>
+
+            <h3>Double Click Detection</h3>
+            <button class="primary" ng-click="detectDoubleClick($event)" style="padding: 15px 30px;">
+                Double Click Me
+            </button>
+            <div class="info-box warning" ng-show="doubleClickMessage">
+                {{ doubleClickMessage }}
+            </div>
+        </div>
+
+        <!-- Section 5: Event Statistics -->
+        <div class="section">
+            <h2>Event Statistics</h2>
+
+            <div class="stats">
+                <div class="stat-box">
+                    <div class="stat-label">Total Clicks</div>
+                    <div class="stat-value">{{ totalClicks }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Total Mouse Moves</div>
+                    <div class="stat-value">{{ mouseMoveCount }}</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Total Events</div>
+                    <div class="stat-value">{{ totalClicks + mouseMoveCount }}</div>
+                </div>
+            </div>
+
+            <button class="danger" ng-click="resetAllStats()">Reset All Statistics</button>
+        </div>
+
+    </div>
+
+    <script>
+        var app = angular.module('eventApp', []);
+
+        app.controller('EventController', function ($scope) {
+
+            // Counter
+            $scope.counter = 0;
+            $scope.totalClicks = 0;
+            $scope.hoverCount = 0;
+
+            // Mouse tracking
+            $scope.mouseX = null;
+            $scope.mouseY = null;
+            $scope.mouseMoveCount = 0;
+
+            // Event logs
+            $scope.clickLogs = [];
+            $scope.lastAction = '';
+
+            // Event details
+            $scope.eventDetails = null;
+            $scope.mouseDetails = null;
+            $scope.coordinates = null;
+            $scope.keyInfo = '';
+
+            // Color selection
+            $scope.colorPalette = ['#667eea', '#764ba2', '#f56565', '#ed8936', '#48bb78', '#3182ce'];
+            $scope.selectedColor = null;
+            $scope.color = '#667eea';
+
+            // Form input
+            $scope.formInput = '';
+
+            // Double click detection
+            $scope.doubleClickMessage = '';
+            $scope.lastClickTime = 0;
+
+            // ng-click handlers
+            $scope.incrementCounter = function () {
+                $scope.counter++;
+                $scope.totalClicks++;
+                $scope.logEvent('Counter incremented');
+            };
+
+            $scope.decrementCounter = function () {
+                $scope.counter--;
+                $scope.totalClicks++;
+                $scope.logEvent('Counter decremented');
+            };
+
+            $scope.resetCounter = function () {
+                $scope.counter = 0;
+                $scope.totalClicks++;
+                $scope.logEvent('Counter reset');
+            };
+
+            $scope.addCounter = function (value) {
+                $scope.counter += value;
+                $scope.totalClicks++;
+                $scope.logEvent('Added ' + value);
+            };
+
+            $scope.subtractCounter = function (value) {
+                $scope.counter -= value;
+                $scope.totalClicks++;
+                $scope.logEvent('Subtracted ' + value);
+            };
+
+            $scope.clickAction = function (action) {
+                $scope.lastAction = action;
+                $scope.totalClicks++;
+            };
+
+            // ng-mousemove handlers
+            $scope.updateMousePosition = function (event) {
+                $scope.mouseX = event.clientX;
+                $scope.mouseY = event.clientY;
+                $scope.mouseMoveCount++;
+            };
+
+            $scope.trackMovement = function (event) {
+                $scope.lastMouseEvent = {
+                    x: event.clientX,
+                    y: event.clientY,
+                    element: event.target.tagName
+                };
+                $scope.mouseMoveCount++;
+            };
+
+            $scope.trackInputMouse = function (event) {
+                $scope.mouseMoveCount++;
+            };
+
+            // $event handlers
+            $scope.getClickDetails = function (event) {
+                $scope.eventDetails = {
+                    type: event.type,
+                    clientX: event.clientX,
+                    clientY: event.clientY,
+                    pageX: event.pageX,
+                    pageY: event.pageY,
+                    button: event.button,
+                    timeStamp: event.timeStamp
+                };
+                $scope.totalClicks++;
+            };
+
+            $scope.getMouseDetails = function (event) {
+                $scope.mouseDetails = {
+                    type: event.type,
+                    clientX: event.clientX,
+                    clientY: event.clientY,
+                    screenX: event.screenX,
+                    screenY: event.screenY
+                };
+                $scope.mouseMoveCount++;
+            };
+
+            $scope.detectKey = function (event) {
+                var keys = [];
+                if (event.ctrlKey) keys.push('Ctrl');
+                if (event.shiftKey) keys.push('Shift');
+                if (event.altKey) keys.push('Alt');
+                if (event.metaKey) keys.push('Meta');
+
+                $scope.keyInfo = keys.length > 0 ? 'Keys pressed: ' + keys.join(', ') : 'No modifier keys';
+                $scope.totalClicks++;
+            };
+
+            $scope.logCoordinates = function (event) {
+                $scope.coordinates = {
+                    clientX: event.clientX,
+                    clientY: event.clientY,
+                    pageX: event.pageX,
+                    pageY: event.pageY,
+                    screenX: event.screenX,
+                    screenY: event.screenY
+                };
+                $scope.totalClicks++;
+            };
+
+            // Color selection
+            $scope.selectColor = function (color, event) {
+                $scope.selectedColor = color;
+                $scope.totalClicks++;
+            };
+
+            // Double click detection
+            $scope.detectDoubleClick = function (event) {
+                var now = Date.now();
+                if (now - $scope.lastClickTime < 300) {
+                    $scope.doubleClickMessage = 'Double click detected!';
+                    setTimeout(function () {
+                        $scope.$apply(function () {
+                            $scope.doubleClickMessage = '';
+                        });
+                    }, 2000);
+                }
+                $scope.lastClickTime = now;
+                $scope.totalClicks++;
+            };
+
+            // Logging
+            $scope.logEvent = function (message) {
+                var timestamp = new Date().toLocaleTimeString();
+                $scope.clickLogs.unshift(timestamp + ' - ' + message);
+                if ($scope.clickLogs.length > 10) {
+                    $scope.clickLogs.pop();
+                }
+            };
+
+            $scope.clickLog = function (message) {
+                $scope.logEvent(message);
+            };
+
+            // Reset functions
+            $scope.resetMouseStats = function () {
+                $scope.mouseMoveCount = 0;
+                $scope.mouseX = null;
+                $scope.mouseY = null;
+                $scope.lastMouseEvent = null;
+            };
+
+            $scope.resetAllStats = function () {
+                $scope.counter = 0;
+                $scope.totalClicks = 0;
+                $scope.mouseMoveCount = 0;
+                $scope.clickLogs = [];
+                $scope.hoverCount = 0;
+                $scope.logEvent('All stats reset');
+            };
+        });
+    </script>
+</body>
+
+</html>

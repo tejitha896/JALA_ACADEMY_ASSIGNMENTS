@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interactive FOR...IN Loop</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .container {
+      background: white;
+      width: 300px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #28a745;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    button:hover {
+      background: #218838;
+    }
+
+    .output {
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    .item {
+      background: #f8f9fa;
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 5px;
+      border-left: 4px solid #28a745;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h3>Student Details</h3>
+  <button onclick="showDetails()">Show Details</button>
+
+  <div id="output" class="output"></div>
+</div>
+
+<script>
+  const student = {
+    name: "Rahul",
+    age: 20,
+    course: "B.Tech",
+    city: "Vijayawada"
+  };
+
+  function showDetails() {
+    let outputDiv = document.getElementById("output");
+    outputDiv.innerHTML = "";
+
+    // Using FOR...IN loop
+    for (let key in student) {
+      let div = document.createElement("div");
+      div.className = "item";
+      div.innerHTML = `<strong>${key}</strong>: ${student[key]}`;
+      outputDiv.appendChild(div);
+    }
+  }
+</script>
+
+</body>
+</html>

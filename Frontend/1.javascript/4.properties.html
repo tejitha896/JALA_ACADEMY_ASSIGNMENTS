@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Person Object</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    .output {
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .item {
+      background: #e9f5ff;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border-left: 4px solid #007bff;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="card">
+  <h3>Person Details</h3>
+
+  <div class="output" id="output"></div>
+</div>
+
+<script>
+  const person = {
+    firstname: "John",
+    lastname: "Doe"
+  };
+
+  let output = document.getElementById("output");
+
+  // Dot notation
+  let div1 = document.createElement("div");
+  div1.className = "item";
+  div1.innerHTML = "<b>Dot:</b> " + person.firstname + " " + person.lastname;
+
+  // Bracket notation
+  let div2 = document.createElement("div");
+  div2.className = "item";
+  div2.innerHTML = "<b>Bracket:</b> " + person["firstname"] + " " + person["lastname"];
+
+  output.appendChild(div1);
+  output.appendChild(div2);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sort Fruits</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    h3 {
+      color: #333;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      width: 200px;
+      margin: 20px auto;
+    }
+
+    li {
+      background: #ffffff;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+<h3>Fruits List:</h3>
+<ul id="fruitList"></ul>
+
+<button onclick="sortDescending()">Sort Descending</button>
+
+<script>
+  let fruits = ["Apple", "Banana", "Mango", "Orange", "Grapes"];
+
+  function displayFruits() {
+    const list = document.getElementById("fruitList");
+    list.innerHTML = "";
+
+    fruits.forEach(fruit => {
+      const li = document.createElement("li");
+      li.textContent = fruit;
+      list.appendChild(li);
+    });
+  }
+
+  function sortDescending() {
+    fruits.sort().reverse();
+    displayFruits();
+  }
+
+  displayFruits();
+</script>
+
+</body>
+</html>

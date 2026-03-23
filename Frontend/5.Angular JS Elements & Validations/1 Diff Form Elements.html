@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="formApp">
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS Form Elements</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <style>
+    body { font-family: Arial; margin: 30px; }
+    label { display: block; margin-top: 10px; }
+    input, select { padding: 5px; margin-top: 5px; width: 200px; }
+    .output { margin-top: 20px; padding: 10px; background: #f0f0f0; width: 250px; }
+  </style>
+</head>
+<body ng-controller="FormController">
+
+  <h2>AngularJS Form Example</h2>
+
+  <form name="myForm">
+    <label>Name:
+      <input type="text" ng-model="user.name">
+    </label>
+
+    <label>Gender:
+      <input type="radio" ng-model="user.gender" value="Male"> Male
+      <input type="radio" ng-model="user.gender" value="Female"> Female
+    </label>
+
+    <label>Hobbies:
+      <input type="checkbox" ng-model="user.hobbyReading"> Reading
+      <input type="checkbox" ng-model="user.hobbySports"> Sports
+    </label>
+
+    <label>Country:
+      <select ng-model="user.country">
+        <option value="USA">USA</option>
+        <option value="India">India</option>
+        <option value="UK">UK</option>
+      </select>
+    </label>
+  </form>
+
+  <div class="output">
+    <h3>Output:</h3>
+    <p>Name: {{user.name}}</p>
+    <p>Gender: {{user.gender}}</p>
+    <p>Hobbies: 
+      {{ (user.hobbyReading ? 'Reading ' : '') + (user.hobbySports ? 'Sports' : '') }}
+    </p>
+    <p>Country: {{user.country}}</p>
+  </div>
+
+<script>
+  angular.module('formApp', [])
+    .controller('FormController', function($scope) {
+      $scope.user = {};
+    });
+</script>
+</body>
+</html>

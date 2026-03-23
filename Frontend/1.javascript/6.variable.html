@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Strict Mode Demo</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8d7da;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .box {
+      background: white;
+      width: 350px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #c82333;
+    }
+
+    .output {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 6px;
+      background: #fff3f3;
+      color: red;
+      font-weight: bold;
+      min-height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h3>Strict Mode Example</h3>
+  <button onclick="runStrictMode()">Run Code</button>
+
+  <div class="output" id="output"></div>
+</div>
+
+<script>
+  function runStrictMode() {
+    "use strict"; // Enable strict mode
+
+    try {
+      x = 100; //Error: variable not declared
+      document.getElementById("output").innerHTML = "Value of x: " + x;
+    } catch (error) {
+      document.getElementById("output").innerHTML =
+        "Error: " + error.message;
+    }
+  }
+</script>
+
+</body>
+</html>

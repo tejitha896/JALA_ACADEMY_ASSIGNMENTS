@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookies Example</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #ede7f6;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            background: #512da8;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #311b92;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Cookie Functions</h2>
+
+<button onclick="setCookie()">Set Cookie</button>
+<button onclick="getCookie()">Get Cookie</button>
+<button onclick="checkCookie()">Check Cookie</button>
+
+<p id="output"></p>
+
+<script>
+// Set Cookie
+function setCookie() {
+    document.cookie = "username=John Doe; path=/";
+    alert("Cookie Set!");
+}
+
+// Get Cookie
+function getCookie() {
+    let name = "username=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            document.getElementById("output").innerText = "Cookie: " + c.substring(name.length);
+            return;
+        }
+    }
+
+    document.getElementById("output").innerText = "Cookie not found!";
+}
+
+// Check Cookie
+function checkCookie() {
+    let username = getCookie();
+
+    if (username != "") {
+        alert("Welcome again " + username);
+    } else {
+        alert("Cookie not set");
+    }
+}
+</script>
+
+</body>
+</html>

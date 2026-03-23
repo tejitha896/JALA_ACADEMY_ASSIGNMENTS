@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Date & Time Event</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #1976d2;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0d47a1;
+        }
+
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Current Date & Time</h2>
+    <button id="btn">Show Date & Time</button>
+    <div id="output"></div>
+
+    <p>
+        This uses <b>addEventListener()</b> to handle button click.
+    </p>
+</div>
+
+<script>
+document.getElementById("btn").addEventListener("click", function() {
+    let now = new Date();
+    document.getElementById("output").innerHTML = now;
+});
+</script>
+
+</body>
+</html>

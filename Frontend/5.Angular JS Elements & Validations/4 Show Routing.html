@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="routeApp">
+<head>
+  <meta charset="UTF-8">
+  <title>AngularJS Routing Example</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+  <style>
+    body { font-family: Arial; margin: 30px; }
+    a { margin-right: 15px; }
+    .view { margin-top: 20px; padding: 20px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+  <h2>AngularJS Routing Example</h2>
+  <a href="#!/">Home</a>
+  <a href="#!/about">About</a>
+  <a href="#!/contact">Contact</a>
+
+  <div class="view" ng-view></div>
+
+<script>
+  angular.module('routeApp', ['ngRoute'])
+    .config(function($routeProvider) {
+      $routeProvider
+        .when('/', {
+          template: '<h3>Welcome Home!</h3><p>This is the home page.</p>'
+        })
+        .when('/about', {
+          template: '<h3>About Us</h3><p>Learn more about us here.</p>'
+        })
+        .when('/contact', {
+          template: '<h3>Contact</h3><p>Contact us at contact@example.com</p>'
+        })
+        .otherwise({
+          template: '<h3>404</h3><p>Page not found!</p>'
+        });
+    });
+</script>
+</body>
+</html>

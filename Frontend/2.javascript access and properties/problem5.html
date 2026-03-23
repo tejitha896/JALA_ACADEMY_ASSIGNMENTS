@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Object Prototype Example</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #a18cd1, #fbc2eb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #6a1b9a;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #6a1b9a;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #4a148c;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Prototype Example</h2>
+    <p id="info">Click the button to see details</p>
+    <button onclick="showDetails()">Show Info</button>
+</div>
+
+<script>
+// Constructor function
+function Student(name) {
+    this.name = name;
+}
+
+// Adding properties using prototype
+Student.prototype.age = 21;
+Student.prototype.course = "Web Development";
+
+// Adding method using prototype
+Student.prototype.getDetails = function() {
+    return "Name: " + this.name + ", Age: " + this.age + ", Course: " + this.course;
+};
+
+// Creating object
+let s1 = new Student("Amit");
+
+function showDetails() {
+    document.getElementById("info").innerText = s1.getDetails();
+}
+</script>
+
+</body>
+</html>

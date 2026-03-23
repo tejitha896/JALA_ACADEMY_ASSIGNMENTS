@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Animations & Pagination</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #fce4ec;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            background: red;
+            margin: 20px auto;
+            animation: moveBox 3s infinite alternate;
+        }
+
+        @keyframes moveBox {
+            0% { transform: translateX(0); background: red; }
+            100% { transform: translateX(200px); background: blue; }
+        }
+
+        /* Pagination */
+        .pagination {
+            margin-top: 30px;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 5px;
+            background: #333;
+            color: white;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .pagination a:hover {
+            background: #ff4081;
+        }
+
+        .pagination-space a {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>CSS Animation</h2>
+<div class="box"></div>
+
+<h2>Pagination (Without Space)</h2>
+<div class="pagination">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+</div>
+
+<h2>Pagination (With Space)</h2>
+<div class="pagination pagination-space">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+</div>
+
+</body>
+</html>

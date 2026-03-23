@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input Restrictions</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #fff8e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            width: 350px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+        }
+
+        input[type="submit"] {
+            background: #ff9800;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<form>
+    <h2>Restrictions</h2>
+
+    <input type="text" disabled value="Disabled Field">
+    <input type="text" readonly value="Readonly Field">
+    <input type="text" maxlength="5" placeholder="Max 5 chars">
+    <input type="number" min="1" max="10" placeholder="1-10">
+    <input type="text" size="10" placeholder="Size 10">
+    <input type="text" required placeholder="Required Field">
+    <input type="text" value="Default Value">
+
+    <input type="submit">
+</form>
+
+</body>
+</html>

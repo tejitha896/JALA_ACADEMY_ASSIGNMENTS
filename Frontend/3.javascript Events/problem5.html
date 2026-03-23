@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Object with Dot Notation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.05);
+        }
+
+        h2 {
+            color: #d84315;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            background: #ff7043;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #d84315;
+            transform: scale(1.1);
+        }
+
+        .output {
+            margin-top: 20px;
+            text-align: left;
+            background: #fbe9e7;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #d84315;
+        }
+
+        .info {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #333;
+            text-align: left;
+        }
+
+        code {
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>JSON Object Example</h2>
+
+    <button onclick="showData()">Show Student Data</button>
+
+    <div class="output" id="output"></div>
+
+    <div class="info">
+        <h3>📘 What is JSON?</h3>
+        <p>
+            JSON (JavaScript Object Notation) is used to store and transfer data in a structured format.
+            It is widely used in APIs and web applications.
+        </p>
+
+        <h3>🧠 Dot Notation</h3>
+        <p>
+            Dot notation is used to access object properties.
+        </p>
+
+        <p>
+            Example: <code>student.name</code> returns the name of the student.
+        </p>
+
+        <h3>📌 Key Features</h3>
+        <ul>
+            <li>Lightweight data format</li>
+            <li>Easy to read and write</li>
+            <li>Used in web services and APIs</li>
+            <li>Supports key-value pairs</li>
+        </ul>
+    </div>
+
+</div>
+
+<script>
+// JSON Object
+let student = {
+    name: "Amit",
+    age: 21,
+    course: "Web Development",
+    city: "Vijayawada"
+};
+
+function showData() {
+    let data = `
+        <b>Name:</b> ${student.name}<br>
+        <b>Age:</b> ${student.age}<br>
+        <b>Course:</b> ${student.course}<br>
+        <b>City:</b> ${student.city}<br><br>
+
+        <b>Access using Dot Notation:</b><br>
+        student.name → ${student.name}<br>
+        student.age → ${student.age}<br>
+        student.course → ${student.course}
+    `;
+
+    document.getElementById("output").innerHTML = data;
+}
+</script>
+
+</body>
+</html>

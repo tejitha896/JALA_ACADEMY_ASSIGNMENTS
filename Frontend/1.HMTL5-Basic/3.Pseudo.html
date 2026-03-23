@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Brew Haven Coffee</title>
+  <style>
+    /* General */
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #f4f1ec;
+}
+
+/* Header */
+header {
+  background: #3e2723;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Tagline using pseudo-element */
+.tagline::before {
+  content: "✨ ";
+}
+.tagline::after {
+  content: " ✨";
+}
+
+/* Navigation */
+nav a {
+  color: white;
+  margin: 10px;
+  text-decoration: none;
+}
+
+/* Hover effect (pseudo-class) */
+nav a:hover {
+  color: gold;
+}
+
+/* HERO SECTION */
+
+/* Add decorative background text */
+.hero::before {
+  content: "☕ Coffee Lovers ☕";
+  display: block;
+  font-size: 18px;
+  color: brown;
+  margin-bottom: 10px;
+}
+
+/* Button */
+button {
+  padding: 10px 15px;
+  background: brown;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Hover */
+button:hover {
+  background: darkred;
+}
+
+/* Add icon after button text */
+button::after {
+  content: " ➜";
+}
+
+/* Sections */
+section {
+  padding: 20px;
+}
+
+/* Menu items */
+.item {
+  background: white;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* First menu item highlight */
+.item:first-child {
+  border-left: 6px solid green;
+}
+
+/* First letter */
+.item p::first-letter {
+  font-size: 150%;
+  color: brown;
+}
+
+/* First line */
+.item p::first-line {
+  font-weight: bold;
+}
+
+/* BEFORE & AFTER for headings */
+.item h3::before {
+  content: "☕ ";
+}
+
+.item h3::after {
+  content: " ⭐";
+}
+
+/* Highlight text selection */
+.item p::selection {
+  background: yellow;
+  color: black;
+}
+
+/* Offers */
+.offers ul li {
+  background: #fff;
+  margin: 5px;
+  padding: 10px;
+}
+
+/* Odd items */
+.offers ul li:nth-child(odd) {
+  background: #ffe0b2;
+}
+
+/* Add icon before list items */
+.offers ul li::before {
+  content: "✔ ";
+  color: green;
+}
+
+/* Contact inputs */
+input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+}
+
+/* Focus */
+input:focus {
+  border: 2px solid blue;
+  background: #e3f2fd;
+}
+
+/* Placeholder styling (pseudo-element) */
+input::placeholder {
+  color: gray;
+  font-style: italic;
+}
+
+/* Footer */
+footer {
+  background: #3e2723;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Footer decoration */
+footer::before {
+  content: "☕ ";
+}
+
+footer::after {
+  content: " ☕";
+}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>☕ Brew Haven Coffee</h1>
+    <p class="tagline">"Where every sip tells a story"</p>
+
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Menu</a>
+      <a href="#">Offers</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h2>Welcome to Your Coffee Place</h2>
+    <p>Enjoy freshly brewed coffee, snacks, and desserts.</p>
+    <button>Order Now</button>
+  </section>
+
+  <!-- About Section -->
+  <section class="about">
+    <h2>About Us</h2>
+    <p>
+      Brew Haven Coffee is a cozy place where coffee lovers meet. 
+      We serve high-quality beans, freshly roasted and brewed with care.
+    </p>
+  </section>
+
+  <!-- Menu Section -->
+  <section class="menu">
+    <h2>Our Menu</h2>
+
+    <div class="item">
+      <h3>Espresso</h3>
+      <p>Strong and rich coffee shot.</p>
+      <span>₹120</span>
+    </div>
+
+    <div class="item">
+      <h3>Cappuccino</h3>
+      <p>Espresso with steamed milk and foam.</p>
+      <span>₹150</span>
+    </div>
+
+    <div class="item">
+      <h3>Latte</h3>
+      <p>Smooth coffee with milk and light foam.</p>
+      <span>₹170</span>
+    </div>
+
+    <div class="item">
+      <h3>Mocha</h3>
+      <p>Chocolate flavored coffee drink.</p>
+      <span>₹190</span>
+    </div>
+  </section>
+
+  <!-- Offers Section -->
+  <section class="offers">
+    <h2>Special Offers</h2>
+    <ul>
+      <li>Buy 1 Get 1 Free on Fridays</li>
+      <li>20% discount for students</li>
+      <li>Free cookie with every latte</li>
+    </ul>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: info@brewhaven.com</p>
+    <p>Phone: +91 9876543210</p>
+
+    <input type="text" placeholder="Enter your name">
+    <input type="text" placeholder="Your message">
+    <button>Send</button>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Brew Haven Coffee | All Rights Reserved</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Input Types</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background: #fff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 320px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .row input {
+            width: auto;
+        }
+
+        input[type="submit"],
+        input[type="reset"],
+        input[type="button"] {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="reset"] {
+            background: #f44336;
+        }
+
+        input[type="button"] {
+            background: #2196F3;
+        }
+    </style>
+</head>
+<body>
+
+<form>
+    <h2>Basic Inputs</h2>
+
+    <input type="text" placeholder="Enter Name">
+    <input type="password" placeholder="Enter Password">
+
+    Gender:<br>
+    <div class="row">
+        <label><input type="radio" name="gender"> Male</label>
+        <label><input type="radio" name="gender"> Female</label>
+    </div>
+
+    Skills:<br>
+    <div class="row">
+        <label><input type="checkbox"> HTML</label>
+        <label><input type="checkbox"> CSS</label>
+    </div>
+
+    <input type="button" value="Click Me">
+    <input type="submit">
+    <input type="reset">
+</form>
+
+</body>
+</html>

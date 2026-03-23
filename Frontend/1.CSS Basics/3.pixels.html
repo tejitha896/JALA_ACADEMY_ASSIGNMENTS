@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Height and Width Example</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh; /* full viewport height */
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* Using pixels */
+  .box-px {
+    width: 300px;
+    background-color: lightcoral;
+    margin: 20px;
+    padding: 15px;
+    color: white;
+  }
+
+  /* Using percentage */
+  .container {
+    width: 80%;     
+    height: 200px;  /* fixed height for better visibility */
+    background-color: lightblue;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  /* Parent with defined height */
+  .parent {
+    width: 100%;
+    height: 300px;
+    background-color: #ddd;
+    padding: 10px;
+  }
+
+  .child {
+    width: 50%;
+    height: 50%;
+    background-color: lightgreen;
+    margin: auto;
+    padding: 10px;
+  }
+</style>
+
+</head>
+<body>
+
+<h2>Height & Width Demo</h2>
+
+<!-- Box using pixels -->
+<div class="box-px">
+  <b>Artificial Intelligence (AI)</b>
+  <ul>
+    <li>Machines can learn and think like humans.</li>
+    <li>Used in apps like chatbots and voice assistants.</li>
+    <li>Helps in healthcare, finance, and education.</li>
+    <li>Can automate repetitive tasks.</li>
+    <li>Improves over time with more data.</li>
+  </ul>
+</div>
+
+<!-- Box using percentage -->
+<div class="container">
+  <b>Internet of Things (IoT)</b>
+  <ul>
+    <li>Connects devices to the internet.</li>
+    <li>Devices can communicate with each other.</li>
+    <li>Used in smart homes and smart cities.</li>
+    <li>Helps monitor and control devices remotely.</li>
+    <li>Improves convenience and efficiency.</li>
+  </ul>
+</div>
+
+<!-- Parent and child -->
+<div class="parent">
+  <div class="child">
+    <b>Blockchain</b>
+    <ul>
+      <li>Stores data in secure digital blocks.</li>
+      <li>Information cannot be easily changed.</li>
+      <li>Works without a central authority.</li>
+      <li>Used in cryptocurrencies like Bitcoin.</li>
+      <li>Provides transparency and security.</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

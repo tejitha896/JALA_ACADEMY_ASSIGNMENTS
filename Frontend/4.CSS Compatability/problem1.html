@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Table Layout - Fixed vs Auto</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #e3f2fd;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        .table-container {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            border: 2px solid black;
+            padding: 10px;
+        }
+
+        th {
+            background: #333;
+            color: white;
+        }
+
+        /* FIXED TABLE */
+        .fixed {
+            table-layout: fixed;
+            background: #c8e6c9;
+        }
+
+        /* AUTO TABLE */
+        .auto {
+            table-layout: auto;
+            background: #ffcdd2;
+        }
+
+        .label {
+            font-weight: bold;
+            font-size: 18px;
+            margin: 10px;
+        }
+
+        .fixed td {
+            overflow-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Table Layout: Fixed vs Auto</h2>
+
+<div class="table-container">
+
+    <div class="label">🔹 Fixed Table Layout</div>
+    <table class="fixed">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Amit</td>
+            <td>
+                This is a very very very long text used to demonstrate how fixed table layout behaves.
+                It will wrap inside the cell but the column width will NOT change.
+            </td>
+        </tr>
+    </table>
+
+    <div class="label">🔹 Auto Table Layout (Default / None)</div>
+    <table class="auto">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Amit</td>
+            <td>
+                This is a very very very long text used to demonstrate how auto table layout behaves.
+                The column width will expand according to this content and make the table wider.
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<h3>📘 Observation in Browser</h3>
+<p>
+✔ Fixed → Column width stays same, text wraps inside cell<br>
+✔ Auto → Column expands based on content<br>
+✔ This difference is clearly visible when using long text<br>
+</p>
+
+</body>
+</html>
