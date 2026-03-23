@@ -1,0 +1,334 @@
+SQL QUERIES WITH QUESTIONS AND ANSWERS
+
+1. Display snum,sname,city and comm of all salespeople.
+Q: SELECT SNUM, SNAME, CITY, COMM FROM SALESPEOPLE;
+
+2. Display all snum without duplicates from all orders.
+Q: SELECT DISTINCT SNUM FROM ORDERS;
+
+3. Display names and commissions of all salespeople in london.
+Q:  SELECT SNAME, COMM FROM SALESPEOPLE WHERE CITY = 'London';
+
+4. All customers with rating of 100.
+Q:  SELECT * FROM CUST WHERE RATING = 100;
+
+5. Produce orderno, amount and date form all rows in the order table.
+Q:  SELECT ONUM, AMT, ODATE FROM ORDERS;
+
+6. All customers in San Jose, who have rating more than 200.
+Q: SELECT * FROM CUST WHERE CITY = 'San Jose' AND RATING > 200;
+
+7. All customers who were either located in San Jose or had a rating above 200.
+Q:  SELECT * FROM CUST WHERE CITY = 'San Jose' OR RATING > 200;
+
+8. All orders for more than $1000.
+Q: SELECT * FROM ORDERS WHERE AMT > 1000;
+
+9. Names and cities of all salespeople in london with commission above 0.10.
+Q: SELECT SNAME, CITY FROM SALESPEOPLE WHERE CITY = 'London' AND COMM > 0.10;
+
+10. All customers excluding those with rating <= 100 unless they are located in Rome.
+Q :  SELECT * FROM CUST WHERE NOT (RATING <= 100 AND CITY <> 'Rome');
+
+11. All salespeople either in Barcelona or in london.
+Q : SELECT * FROM SALESPEOPLE WHERE CITY IN ('Barcelona', 'London');
+
+12. All salespeople with commission between 0.10 and 0.12.
+Q : SELECT * FROM SALESPEOPLE WHERE COMM > 0.10 AND COMM < 0.12;
+
+13. All customers with NULL values in city column.
+Q : SELECT * FROM CUST WHERE CITY IS NULL;
+
+14. All orders taken on Oct 3rd and Oct 4th 1994.
+Q : SELECT * FROM ORDERS WHERE ODATE IN ('03-OCT-94','04-OCT-94');
+
+15. All customers serviced by Peel or Motika.
+Q : SELECT * FROM CUST WHERE SNUM IN (SELECT SNUM FROM SALESPEOPLE WHERE SNAME IN ('Peel','Motika'));
+
+16. All customers whose names begin with A to B.
+Q : SELECT * FROM CUST WHERE CNAME LIKE '[A-B]%';
+
+17. All orders except those with 0 or NULL amt.
+Q :  SELECT * FROM ORDERS WHERE AMT IS NOT NULL AND AMT <> 0;
+
+18. Count the number of salespeople currently listing orders.
+Q:  SELECT COUNT(DISTINCT SNUM) FROM ORDERS;
+
+19. Largest order taken by each salesperson, datewise.
+Q : SELECT SNUM, ODATE, MAX(AMT) FROM ORDERS GROUP BY SNUM, ODATE;
+
+20. Largest order taken by each salesperson with value > 3000.
+Q:  SELECT SNUM, MAX(AMT) FROM ORDERS GROUP BY SNUM HAVING MAX(AMT) > 3000;
+
+21. Which day had highest total amount ordered.
+Q:   SELECT ODATE FROM ORDERS GROUP BY ODATE ORDER BY SUM(AMT) DESC LIMIT 1;
+
+22. Count all orders for Oct 3rd.
+Q:  SELECT COUNT(*) FROM ORDERS WHERE ODATE = '03-OCT-94';
+
+23. Count number of different non-null cities in customers.
+Q:   SELECT COUNT(DISTINCT CITY) FROM CUST WHERE CITY IS NOT NULL;
+
+24. Each customer's smallest order.
+Q:   SELECT CNUM, MIN(AMT) FROM ORDERS GROUP BY CNUM;
+
+25. First customer alphabetically starting with G.
+Q:  SELECT CNAME FROM CUST WHERE CNAME LIKE 'G%' ORDER BY CNAME LIMIT 1;
+
+26. Output format statement.
+Q:  SELECT 'For ' || ODATE || ' there are ' || COUNT(*) || ' orders' FROM ORDERS GROUP BY ODATE;
+
+27. Commission (12%) for each order.
+Q : SELECT ONUM, SNUM, AMT*0.12 AS COMMISSION FROM ORDERS;
+
+28. Highest rating in each city.
+Q:  SELECT CITY, MAX(RATING) FROM CUST GROUP BY CITY;
+
+29. Total orders per day in descending order.
+Q:  SELECT ODATE, SUM(AMT) FROM ORDERS GROUP BY ODATE ORDER BY SUM(AMT) DESC;
+
+30. All combinations of salespeople and customers in same city.
+Q:   SELECT S.SNAME, C.CNAME FROM SALESPEOPLE S, CUST C WHERE S.CITY = C.CITY;
+
+31. Name of all customers matched with the salespeople serving them.
+Q : SELECT C.CNAME, S.SNAME FROM CUST C JOIN SALESPEOPLE S ON C.SNUM = S.SNUM;
+
+32. List each order number followed by the name of the customer who made the order.
+Q :SELECT O.ONUM, C.CNAME FROM ORDERS O JOIN CUST C ON O.CNUM = C.CNUM;
+
+33. Names of salesperson and customer for each order after the order number.
+Q :SELECT O.ONUM, S.SNAME, C.CNAME FROM ORDERS O JOIN SALESPEOPLE S ON O.SNUM = S.SNUM JOIN CUST C ON O.CNUM = C.CNUM;
+
+34. Produce all customers serviced by salespeople with a commission above 12%.
+Q :SELECT * FROM CUST WHERE SNUM IN (SELECT SNUM FROM SALESPEOPLE WHERE COMM > 0.12);
+
+35. Calculate the amount of the salesperson’s commission on each order with a rating above 100.
+Q :SELECT O.ONUM, O.AMT * S.COMM AS COMMISSION FROM ORDERS O JOIN CUST C ON O.CNUM = C.CNUM JOIN SALESPEOPLE S ON O.SNUM = S.SNUM WHERE C.RATING > 100;
+
+36. Find all pairs of customers having the same rating.
+Q :SELECT A.CNAME, B.CNAME FROM CUST A, CUST B WHERE A.RATING = B.RATING AND A.CNUM <> B.CNUM;
+
+37. Find all pairs of customers having the same rating, each pair coming once only.
+Q :SELECT A.CNAME, B.CNAME FROM CUST A, CUST B WHERE A.RATING = B.RATING AND A.CNUM < B.CNUM;
+
+38. Policy is to assign three salesperson to each customers. Display all such combinations.
+Q :SELECT C.CNAME, S.SNAME FROM CUST C CROSS JOIN SALESPEOPLE S;
+
+39. Display all customers located in cities where salesman Serres has customer.
+Q :SELECT * FROM CUST WHERE CITY IN (
+    	SELECT CITY FROM CUST WHERE SNUM = (SELECT SNUM FROM SALESPEOPLE WHERE SNAME = 'Serres')
+	);
+
+40. Find all pairs of customers served by single salesperson.
+Q : SELECT A.CNAME, B.CNAME FROM CUST A, CUST B WHERE A.SNUM = B.SNUM AND A.CNUM < B.CNUM;
+
+41. Produce all pairs of salespeople living in the same city (no duplicates).
+Q :SELECT A.SNAME, B.SNAME FROM SALESPEOPLE A, SALESPEOPLE B WHERE A.CITY = B.CITY AND A.SNUM < B.SNUM;
+
+42. Produce all pairs of orders by given customer, include customer name, no duplicates.
+Q :SELECT A.ONUM, B.ONUM, C.CNAME FROM ORDERS A, ORDERS B, CUST C WHERE A.CNUM = B.CNUM AND A.ONUM < B.ONUM AND A.CNUM = C.CNUM;
+
+43. Names and cities of all customers with same rating as Hoffman.
+Q :SELECT CNAME, CITY FROM CUST WHERE RATING = (SELECT RATING FROM CUST WHERE CNAME = 'Hoffman');
+
+44. Extract all the orders of Motika.
+Q :SELECT * FROM ORDERS WHERE SNUM = (SELECT SNUM FROM SALESPEOPLE WHERE SNAME = 'Motika');
+
+45. All orders credited to the same salesperson who services Hoffman.
+Q :SELECT * FROM ORDERS WHERE SNUM = (SELECT SNUM FROM CUST WHERE CNAME = 'Hoffman');
+
+46. All orders greater than the average for Oct 4.
+Q :SELECT * FROM ORDERS WHERE AMT > (SELECT AVG(AMT) FROM ORDERS WHERE ODATE = '04-OCT-94');
+
+47. Find average commission of salespeople in London.
+Q :SELECT AVG(COMM) FROM SALESPEOPLE WHERE CITY = 'London';
+
+48. Find all orders attributed to salespeople servicing customers in London.
+Q :SELECT * FROM ORDERS WHERE SNUM IN (SELECT SNUM FROM CUST WHERE CITY = 'London');
+
+49. Extract commissions of all salespeople servicing customers in London.
+Q :SELECT COMM FROM SALESPEOPLE WHERE SNUM IN (SELECT SNUM FROM CUST WHERE CITY = 'London');
+
+50. Find all customers whose cnum is 1000 above the snum of Serres.
+Q :SELECT * FROM CUST WHERE CNUM = (SELECT SNUM + 1000 FROM SALESPEOPLE WHERE SNAME = 'Serres');
+
+51. Count the customers with rating above San Jose’s average.
+Q :SELECT COUNT(*) FROM CUST WHERE RATING > (SELECT AVG(RATING) FROM CUST WHERE CITY = 'San Jose');
+
+52. Obtain all orders for customer named Cisnerous.
+Q :SELECT * FROM ORDERS WHERE CNUM = (SELECT CNUM FROM CUST WHERE CNAME = 'Cisnerous');
+
+53. Names and rating of customers who have above average orders.
+Q :SELECT DISTINCT C.CNAME, C.RATING FROM CUST C JOIN ORDERS O ON C.CNUM = O.CNUM WHERE O.AMT > (SELECT AVG(AMT) FROM ORDERS);
+
+54. Total amount per salesperson greater than largest order.
+Q :SELECT SNUM, SUM(AMT) FROM ORDERS GROUP BY SNUM HAVING SUM(AMT) > (SELECT MAX(AMT) FROM ORDERS);
+
+55. All customers with orders on Oct 3.
+Q :SELECT DISTINCT C.* FROM CUST C JOIN ORDERS O ON C.CNUM = O.CNUM WHERE O.ODATE = '03-OCT-94';
+
+56. Salespeople with more than one customer.
+Q :SELECT SNUM, SNAME FROM SALESPEOPLE WHERE SNUM IN (
+    	SELECT SNUM FROM CUST GROUP BY SNUM HAVING COUNT(*) > 1
+	);
+
+57. Check if correct salesperson credited with each sale.
+Q :SELECT O.* FROM ORDERS O JOIN CUST C ON O.CNUM = C.CNUM WHERE O.SNUM = C.SNUM;
+
+58. Orders above average for their customer.
+Q :SELECT * FROM ORDERS O WHERE AMT > (
+    	SELECT AVG(AMT) FROM ORDERS WHERE CNUM = O.CNUM
+	);
+
+59. Sum of amounts grouped by date (>= max + 2000 condition).
+Q :SELECT ODATE, SUM(AMT) FROM ORDERS GROUP BY ODATE HAVING SUM(AMT) >= (SELECT MAX(AMT) FROM ORDERS) + 2000;
+
+60. Customers with max rating in their city.
+Q :SELECT CNUM, CNAME, CITY FROM CUST C WHERE RATING = (
+    	SELECT MAX(RATING) FROM CUST WHERE CITY = C.CITY
+	);
+
+61A.(JOIN) Salespeople who have customers in their cities but don’t serve them.
+Q :SELECT DISTINCT S.* FROM SALESPEOPLE S JOIN CUST C ON S.CITY = C.CITY WHERE S.SNUM <> C.SNUM;
+
+61B. (Correlated Subquery)
+Q :SELECT * FROM SALESPEOPLE S WHERE EXISTS (
+    	SELECT 1 FROM CUST C WHERE C.CITY = S.CITY AND C.SNUM <> S.SNUM
+`);
+
+62. Extract customers if at least one is in San Jose.
+Q :SELECT CNUM, CNAME, CITY FROM CUST WHERE EXISTS (SELECT 1 FROM CUST WHERE CITY = 'San Jose');
+
+63. Salespeople numbers with multiple customers.
+Q :SELECT SNUM FROM CUST GROUP BY SNUM HAVING COUNT(*) > 1;
+
+64. Salespeople with multiple customers.
+Q :SELECT S.SNUM, S.SNAME, S.CITY FROM SALESPEOPLE S JOIN CUST C ON S.SNUM = C.SNUM GROUP BY S.SNUM, S.SNAME, S.CITY HAVING COUNT(C.CNUM) > 1;
+
+65. Salespeople who serve only one customer.
+Q :SELECT SNUM FROM CUST GROUP BY SNUM HAVING COUNT(*) = 1;
+
+66. Salespeople with more than one current order.
+Q :SELECT S.* FROM SALESPEOPLE S WHERE S.SNUM IN (
+    SELECT SNUM FROM ORDERS GROUP BY SNUM HAVING COUNT(*) > 1
+	);
+
+67. Salespeople with customers rating 300 (EXISTS).
+Q :SELECT * FROM SALESPEOPLE S WHERE EXISTS (
+    SELECT 1 FROM CUST C WHERE C.SNUM = S.SNUM AND C.RATING = 300
+   );
+
+68. Same using JOIN.
+Q :SELECT DISTINCT S.* FROM SALESPEOPLE S JOIN CUST C ON S.SNUM = C.SNUM WHERE C.RATING = 300;
+
+69. Salespeople with customers in their city not assigned (EXISTS).
+Q :SELECT * FROM SALESPEOPLE S WHERE EXISTS (
+    SELECT 1 FROM CUST C WHERE C.CITY = S.CITY AND C.SNUM <> S.SNUM
+	);
+
+70. Customers whose salesperson has another customer with orders.
+Q :SELECT * FROM CUST C WHERE EXISTS (
+    SELECT 1 FROM CUST C2, ORDERS O
+    WHERE C2.SNUM = C.SNUM 
+    AND C2.CNUM <> C.CNUM
+    AND C2.CNUM = O.CNUM
+);
+
+71. Salespeople with customers in their cities (ANY).
+Q: SELECT * FROM SALESPEOPLE WHERE CITY = ANY (SELECT CITY FROM CUST);
+
+	-- using IN
+	SELECT * FROM SALESPEOPLE WHERE CITY IN (SELECT CITY FROM CUST);
+
+72. Salespeople for whom customers follow them alphabetically.
+-- ANY
+	Q :SELECT * FROM SALESPEOPLE S WHERE S.SNAME < ANY (SELECT CNAME FROM CUST);
+
+-- EXISTS
+	Q :SELECT * FROM SALESPEOPLE S WHERE EXISTS ( SELECT 1 FROM CUST C WHERE C.CNAME > S.SNAME);
+
+73. Customers with rating greater than any in Rome.
+Q :SELECT * FROM CUST WHERE RATING > ANY (SELECT RATING FROM CUST WHERE CITY = 'Rome');
+
+74. Orders greater than at least one order from Oct 6.
+Q :SELECT *
+FROM ORDERS
+WHERE AMT > ANY (SELECT AMT FROM ORDERS WHERE ODATE = '06-OCT-94');
+
+75A. Orders smaller than any for San Jose (ANY).
+Q :SELECT * FROM ORDERS WHERE AMT < ANY (
+    SELECT AMT FROM ORDERS WHERE CNUM IN (SELECT CNUM FROM CUST WHERE CITY = 'San Jose'));
+
+75B. Without ANY.
+Q :SELECT *  FROM ORDERS O WHERE EXISTS (
+    SELECT 1 FROM ORDERS O2 WHERE O2.CNUM IN (SELECT CNUM FROM CUST WHERE CITY='San Jose') AND O.AMT < O2.AMT
+	);
+
+76A. Customers higher than every Paris (ALL).
+Q :SELECT * FROM CUST WHERE RATING > ALL (SELECT RATING FROM CUST WHERE CITY = 'Paris');
+
+76B. Using NOT EXISTS.
+Q :SELECT * FROM CUST C WHERE NOT EXISTS (
+    SELECT 1 FROM CUST P WHERE P.CITY='Paris' AND P.RATING >= C.RATING
+	);
+
+77. Customers rating >= ANY of Serres customers.
+Q :SELECT * FROM CUST WHERE RATING >= ANY (
+    SELECT RATING FROM CUST WHERE SNUM = (SELECT SNUM FROM SALESPEOPLE WHERE SNAME='Serres')
+   );
+
+78. Salespeople with no customers in their city.
+-- ANY
+	Q :SELECT * FROM SALESPEOPLE S WHERE CITY <> ALL (SELECT CITY FROM CUST WHERE SNUM = S.SNUM);
+
+-- ALL
+	Q :SELECT * FROM SALESPEOPLE S WHERE NOT EXISTS (
+    	SELECT 1 FROM CUST C WHERE C.SNUM = S.SNUM AND C.CITY = S.CITY
+    );
+
+79. Orders greater than any for London customers.
+Q :SELECT * FROM ORDERS WHERE AMT > ANY (
+    SELECT AMT FROM ORDERS WHERE CNUM IN (SELECT CNUM FROM CUST WHERE CITY='London')
+   );
+
+80. Salespeople and customers in London.
+Q :SELECT SNAME AS NAME FROM SALESPEOPLE WHERE CITY='London' UNION SELECT CNAME FROM CUST WHERE CITY='London';
+
+81. For each salesperson, dates of highest and lowest orders.
+Q :SELECT SNUM, ODATE, AMT FROM ORDERS O WHERE AMT = (SELECT MAX(AMT) FROM ORDERS WHERE SNUM = O.SNUM) OR AMT = (SELECT MIN(AMT) FROM ORDERS 	WHERE SNUM = O.SNUM);
+
+82. List all salespeople with/without customers in their cities.
+Q :SELECT S.*, 
+	CASE WHEN EXISTS (
+    		SELECT 1 FROM CUST C WHERE C.CITY = S.CITY
+	) THEN 'Has Customers' ELSE 'No Customers' END AS STATUS
+	FROM SALESPEOPLE S;
+
+83. Append strings indicating match or not.
+Q :SELECT S.SNAME, 
+	CASE WHEN EXISTS (
+    		SELECT 1 FROM CUST C WHERE C.CITY = S.CITY AND C.SNUM = S.SNUM
+	) THEN 'Matched' ELSE 'Not Matched' END
+	FROM SALESPEOPLE S;
+
+84. Union showing rating status.
+Q :SELECT CNAME, CITY, RATING, 'High Rating' FROM CUST WHERE RATING >= 200 UNION SELECT CNAME, CITY, RATING, 'Low Rating'
+	FROM CUST WHERE RATING < 200;
+
+85. Names & numbers of salespeople and customers with >1 orders.
+Q :SELECT S.SNAME, S.SNUM FROM SALESPEOPLE S WHERE S.SNUM IN (SELECT SNUM FROM ORDERS GROUP BY SNUM HAVING COUNT(*)>1) UNION
+	SELECT C.CNAME, C.CNUM FROM CUST C WHERE C.CNUM IN (SELECT CNUM FROM ORDERS GROUP BY CNUM HAVING COUNT(*)>1) ORDER BY 1;
+
+86. Union of three queries.
+Q :SELECT SNUM FROM SALESPEOPLE WHERE CITY='San Jose' UNION SELECT CNUM FROM CUST WHERE CITY='San Jose' UNION ALL SELECT ONUM FROM ORDERS WHERE 	ODATE='03-OCT-94';
+
+87. Salespeople in London with at least one customer there.
+Q :SELECT DISTINCT S.* FROM SALESPEOPLE S JOIN CUST C ON S.SNUM = C.SNUM WHERE S.CITY='London' AND C.CITY='London';
+
+88. Salespeople in London without customers there.
+Q :SELECT * FROM SALESPEOPLE S WHERE CITY='London' AND NOT EXISTS (
+    	SELECT 1 FROM CUST C WHERE C.SNUM = S.SNUM AND C.CITY='London'
+	);
+
+89. Salespeople matched to customers including those without customers.
+Q :SELECT S.SNAME, C.CNAME FROM SALESPEOPLE S LEFT JOIN CUST C ON S.SNUM = C.SNUM UNION SELECT S.SNAME, C.CNAME FROM SALESPEOPLE S RIGHT JOIN CUST C ON S.SNUM = C.SNUM;
